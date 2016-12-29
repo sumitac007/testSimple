@@ -1,16 +1,34 @@
 
 var http = require('http');
+var express = require('express');
+
+var app = express();
 
 var hostname = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
 
-var server;
-server = http.createServer(function (req, res) {
-	console.log(req.headers);
-	res.writeHead(200, {'Content-Type': 'text/html'});
-	res.end('<html><body><h1>Hello World</h1></body></html>');
+
+app.get('/',function(req,res,next){
+
+	res.writeHead(200,{"Content-Type":"text/html"});
+	res.end('<html><body><h1>Hello World!</h1></body></html>');
+
 });
 
-server.listen(port,hostname,function(){
-	console.log('Server running at http://' + hostname + ':' + port);
+// var server;
+// server = http.createServer(function (req, res) {
+// 	console.log(req.headers);
+// 	res.writeHead(200, {'Content-Type': 'text/html'});
+// 	res.end('<html><body><h1>Hello World</h1></body></html>');
+// });
+
+  // Set the IP and port to use the OpenShift variables.
+  app.set('port', process.env.OPENSHIFT_NODEJS_PORT ||  process.env.OPENSHIFT_INTERNAL_PORT || process.env.PORT || 3000);
+  app.set('ip', process.env.OPENSHIFT_NODEJS_IP || process.env.OPENSHIFT_INTERNAL_IP || '127.0.0.1');
+
+// ...
+
+// Set the app.listen to use the port and ip.
+app.listen(app.get('port'), app.get('ip'), function(){
+  console.log("Express server listening on " + app.get('ip') + ":" + app.get('port'));
 });
