@@ -1,0 +1,17 @@
+{
+  "name": "sampleNode",
+  "version": "1.0.0",
+  "description": "",
+  "engines": {
+    "node": "5.9.1"
+  },
+  "scripts": {
+    "start": "node app"
+  },
+  "author": "",
+  "license": "ISC",
+  "main" : "app.js",
+  "dependencies": {
+    
+  }
+}
