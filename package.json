@@ -12,6 +12,6 @@
   "license": "ISC",
   "main" : "app.js",
   "dependencies": {
-    
+     "http": "0.0.0"
   }
 }
